@@ -8,7 +8,6 @@ const createButton = (id, text) => {
 };
 
 const createForm = type => {
-  const formDiv = document.getElementById('form-container');
   const form = document.createElement('form');
   form.setAttribute('id', 'form');
 
@@ -39,7 +38,7 @@ const createForm = type => {
   const submit = document.createElement('input');
   setAttributes(submit, { type: 'submit', id: 'submit', value: 'Submit' });
   form.appendChild(submit);
-  formDiv.appendChild(form);
+  return form;
 };
 
 export { createButton, createForm };
