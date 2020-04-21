@@ -1,9 +1,13 @@
 import { setAttributes, createInputBlock } from './helper-functions';
 
+const buttonsContainer = document.getElementById('buttons-container');
+const formContainer = document.getElementById('form-container');
+
 const createButton = (id, text) => {
   const button = document.createElement('button');
   button.innerText = text;
   setAttributes(button, { id, class: 'buttons' });
+  buttonsContainer.appendChild(button);
   return button;
 };
 
@@ -38,6 +42,7 @@ const createForm = type => {
   const submit = document.createElement('input');
   setAttributes(submit, { type: 'submit', id: 'submit', value: 'Submit' });
   form.appendChild(submit);
+  formContainer.appendChild(form);
   return form;
 };
 
