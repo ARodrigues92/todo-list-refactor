@@ -1,0 +1,7 @@
+.box {
+  width: max-content;
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+}
