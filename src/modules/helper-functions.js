@@ -1,3 +1,19 @@
+const display = document.getElementById('display-area');
+const buttonsContainer = document.getElementById('buttons-container');
+const formContainer = document.getElementById('form-container');
+
+const clearDisplay = () => {
+  display.innerHTML = '';
+};
+
+const clearButtonsContainer = () => {
+  buttonsContainer.innerHTML = '';
+};
+
+const clearformContainer = () => {
+  formContainer.innerHTML = '';
+};
+
 const setAttributes = (element, attributes) => {
   const keys = Object.keys(attributes);
 
@@ -26,4 +42,10 @@ const createInputBlock = (type, title, text, extraAttributes) => {
   return newDiv;
 };
 
-export { setAttributes, createInputBlock };
+export {
+  clearDisplay,
+  clearButtonsContainer,
+  clearformContainer,
+  setAttributes,
+  createInputBlock,
+};
