@@ -7,6 +7,7 @@ import {
   clearButtonsContainer,
   clearDisplay,
 } from './modules/helper-functions';
+import { renderTasks } from './modules/render-tasks';
 
 const displayTasksPage = projectId => {
   clearButtonsContainer();
@@ -17,8 +18,10 @@ const displayTasksPage = projectId => {
     form.addEventListener('submit', e => {
       e.preventDefault();
       createTask(projectId, e.target.elements);
+      renderTasks(projectId);
     });
   });
+  renderTasks(projectId);
 };
 
 const displayProjectsPage = () => {
