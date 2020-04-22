@@ -22,8 +22,8 @@ const renderProject = (key, project) => {
 const renderProjects = () => {
   display.innerHTML = '';
   for (let key = 0; key < localStorage.length; key += 1) {
-    const object = JSON.parse(localStorage.getItem(key));
-    const renderedProject = renderProject(key, object);
+    const project = JSON.parse(localStorage.getItem(key));
+    const renderedProject = renderProject(key, project);
     display.appendChild(renderedProject);
   }
 };

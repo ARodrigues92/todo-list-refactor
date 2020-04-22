@@ -2,7 +2,7 @@ import './styles/reset.css';
 import './styles/main.css';
 import { createButton, createForm } from './modules/elements-creation';
 import { createProject } from './modules/functionality';
-import { renderProjects } from './modules/render';
+import { renderProjects } from './modules/render-projects';
 
 const displayProjectsPage = () => {
   const addProjectButton = createButton('add-button', 'Add Project');
