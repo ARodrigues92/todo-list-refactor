@@ -30,6 +30,7 @@ const createTask = (projectId, data) => {
   const notes = data[4].value;
 
   const creationDate = getCurrentDate();
+  const complete = false;
 
   const newTask = {
     title,
@@ -38,6 +39,7 @@ const createTask = (projectId, data) => {
     creationDate,
     priority,
     notes,
+    complete,
   };
 
   const project = JSON.parse(localStorage.getItem(projectId));
