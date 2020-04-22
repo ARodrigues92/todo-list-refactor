@@ -22,6 +22,29 @@ const saveObject = object => {
   localStorage.setItem(id, JSON.stringify(object));
 };
 
+const createTask = (projectId, data) => {
+  const title = data[0].value;
+  const description = data[1].value || 'No description provided';
+  const dueDate = data[2].value || 'Due date not set';
+  const priority = data[3].value || 3;
+  const notes = data[4].value;
+
+  const creationDate = getCurrentDate();
+
+  const newTask = {
+    title,
+    description,
+    dueDate,
+    creationDate,
+    priority,
+    notes,
+  };
+
+  const project = JSON.parse(localStorage.getItem(projectId));
+  project.tasks.push(newTask);
+  localStorage.setItem(projectId, JSON.stringify(project));
+};
+
 const createProject = data => {
   const title = data[0].value;
   const description = data[1].value || 'No description provided';
@@ -34,4 +57,4 @@ const createProject = data => {
   saveObject(newProject);
 };
 
-export { createProject };
+export { createTask, createProject };

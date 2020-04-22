@@ -5,6 +5,7 @@ const display = document.getElementById('display-area');
 const renderProject = (key, project) => {
   const projectDiv = document.createElement('div');
   projectDiv.setAttribute('data-proj', key);
+  projectDiv.classList.add('project');
   projectDiv.classList.add('box');
 
   const titleP = document.createElement('p');

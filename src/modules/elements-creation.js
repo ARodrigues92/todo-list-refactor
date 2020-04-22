@@ -21,7 +21,7 @@ const createForm = type => {
   form.appendChild(createInputBlock('text', 'description', 'Description:'));
   form.appendChild(createInputBlock('date', 'due-date', 'Due date:'));
 
-  if (type === 'toDo') {
+  if (type === 'task') {
     form.append(
       createInputBlock('number', 'priority', 'Priority:', {
         min: 1,
