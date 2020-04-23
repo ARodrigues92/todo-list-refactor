@@ -7,7 +7,13 @@ import {
   clearButtonsContainer,
   clearDisplay,
 } from './modules/helper-functions';
-import { renderTasks } from './modules/render-tasks';
+import { renderTasks, expandTask } from './modules/render-tasks';
+
+const displayExpandedTaskPage = (project, task) => {
+  clearButtonsContainer();
+  clearDisplay();
+  expandTask(task);
+};
 
 const displayTasksPage = projectId => {
   const project = JSON.parse(localStorage.getItem(projectId));
@@ -23,6 +29,15 @@ const displayTasksPage = projectId => {
     });
   });
   renderTasks(project);
+
+  const taskDivs = document.querySelectorAll('.task');
+  taskDivs.forEach(taskDiv => {
+    taskDiv.addEventListener('click', () => {
+      const taskIndex = taskDiv.getAttribute('data-task');
+      const task = JSON.parse(localStorage.getItem(projectId)).tasks[taskIndex];
+      displayExpandedTaskPage(project, task);
+    });
+  });
 };
 
 const displayProjectsPage = () => {
