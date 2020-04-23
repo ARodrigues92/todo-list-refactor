@@ -1,5 +1,3 @@
-import { clearDisplay } from './helper-functions';
-
 const display = document.getElementById('display-area');
 
 const renderProject = (key, project) => {
@@ -23,7 +21,6 @@ const renderProject = (key, project) => {
 };
 
 const renderProjects = () => {
-  clearDisplay();
   for (let key = 0; key < localStorage.length; key += 1) {
     const project = JSON.parse(localStorage.getItem(key));
     const renderedProject = renderProject(key, project);

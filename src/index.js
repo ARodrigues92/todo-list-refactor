@@ -3,29 +3,24 @@ import './styles/main.css';
 import { createButton, createForm } from './modules/elements-creation';
 import { createTask, createProject } from './modules/functionality';
 import { renderProjects } from './modules/render-projects';
-import {
-  clearButtonsContainer,
-  clearDisplay,
-} from './modules/helper-functions';
+import { clearAll } from './modules/helper-functions';
 import { renderTasks, expandTask } from './modules/render-tasks';
 
 const displayExpandedTaskPage = (project, task) => {
-  clearButtonsContainer();
-  clearDisplay();
+  clearAll();
   expandTask(task);
 };
 
 const displayTasksPage = projectId => {
   const project = JSON.parse(localStorage.getItem(projectId));
-  clearButtonsContainer();
-  clearDisplay();
+  clearAll();
   const addTaskButton = createButton('add-button', 'Add Task');
   addTaskButton.addEventListener('click', () => {
     const form = createForm('task');
     form.addEventListener('submit', e => {
       e.preventDefault();
       createTask(project, projectId, e.target.elements);
-      renderTasks(project);
+      displayTasksPage(projectId);
     });
   });
   renderTasks(project);
@@ -41,13 +36,14 @@ const displayTasksPage = projectId => {
 };
 
 const displayProjectsPage = () => {
+  clearAll();
   const addProjectButton = createButton('add-button', 'Add Project');
   addProjectButton.addEventListener('click', () => {
     const form = createForm('project');
     form.addEventListener('submit', e => {
       e.preventDefault();
       createProject(e.target.elements);
-      renderProjects();
+      displayProjectsPage();
     });
   });
   renderProjects();

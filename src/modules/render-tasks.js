@@ -1,5 +1,3 @@
-import { clearDisplay } from './helper-functions';
-
 const display = document.getElementById('display-area');
 
 const expandTask = task => {
@@ -61,7 +59,6 @@ const renderTask = (task, index) => {
 };
 
 const renderTasks = project => {
-  clearDisplay();
   project.tasks.forEach((task, index) => {
     const renderedTask = renderTask(task, index);
     display.appendChild(renderedTask);

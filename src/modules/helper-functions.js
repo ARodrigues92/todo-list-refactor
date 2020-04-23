@@ -2,15 +2,9 @@ const display = document.getElementById('display-area');
 const buttonsContainer = document.getElementById('buttons-container');
 const formContainer = document.getElementById('form-container');
 
-const clearDisplay = () => {
+const clearAll = () => {
   display.innerHTML = '';
-};
-
-const clearButtonsContainer = () => {
   buttonsContainer.innerHTML = '';
-};
-
-const clearformContainer = () => {
   formContainer.innerHTML = '';
 };
 
@@ -42,10 +36,4 @@ const createInputBlock = (type, title, text, extraAttributes) => {
   return newDiv;
 };
 
-export {
-  clearDisplay,
-  clearButtonsContainer,
-  clearformContainer,
-  setAttributes,
-  createInputBlock,
-};
+export { clearAll, setAttributes, createInputBlock };
