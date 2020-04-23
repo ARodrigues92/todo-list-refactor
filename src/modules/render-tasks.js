@@ -1,3 +1,5 @@
+import { createButtons } from './elements-creation';
+
 const display = document.getElementById('display-area');
 
 const expandTask = task => {
@@ -60,8 +62,12 @@ const renderTask = (task, index) => {
 
 const renderTasks = project => {
   project.tasks.forEach((task, index) => {
+    const outerDiv = document.createElement('div');
     const renderedTask = renderTask(task, index);
-    display.appendChild(renderedTask);
+    const deleteButton = createButtons('delete-button', 'Delete');
+    deleteButton.setAttribute('data-task', index);
+    outerDiv.append(renderedTask, deleteButton);
+    display.appendChild(outerDiv);
   });
 };
 

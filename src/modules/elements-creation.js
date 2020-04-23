@@ -11,6 +11,13 @@ const createButton = (id, text) => {
   return button;
 };
 
+const createButtons = (butonClass, text) => {
+  const button = document.createElement('button');
+  button.innerText = text;
+  button.classList.add(butonClass);
+  return button;
+};
+
 const createForm = type => {
   const form = document.createElement('form');
   form.setAttribute('id', 'form');
@@ -46,4 +53,4 @@ const createForm = type => {
   return form;
 };
 
-export { createButton, createForm };
+export { createButton, createButtons, createForm };

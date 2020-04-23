@@ -1,3 +1,5 @@
+import { createButtons } from './elements-creation';
+
 const display = document.getElementById('display-area');
 
 const renderProject = (key, project) => {
@@ -24,8 +26,12 @@ const renderProjects = () => {
   for (let key = 0; key < localStorage.length; key += 1) {
     const project = JSON.parse(localStorage.getItem(key));
     const renderedProject = renderProject(key, project);
-    display.appendChild(renderedProject);
+    const outerDiv = document.createElement('div');
+    const deleteButton = createButtons('delete-button', 'Delete');
+    deleteButton.setAttribute('data-proj', key);
+    outerDiv.append(renderedProject, deleteButton);
+    display.appendChild(outerDiv);
   }
 };
 
-export { renderProjects };
+export default renderProjects;

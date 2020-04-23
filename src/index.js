@@ -1,8 +1,13 @@
 import './styles/reset.css';
 import './styles/main.css';
 import { createButton, createForm } from './modules/elements-creation';
-import { createTask, createProject } from './modules/functionality';
-import { renderProjects } from './modules/render-projects';
+import {
+  createTask,
+  createProject,
+  deleteTask,
+  deleteProject,
+} from './modules/functionality';
+import renderProjects from './modules/render-projects';
 import { clearAll } from './modules/helper-functions';
 import { renderTasks, expandTask } from './modules/render-tasks';
 
@@ -21,6 +26,7 @@ const displayExpandedTaskPage = (projectId, task) => {
 const displayTasksPage = projectId => {
   const project = JSON.parse(localStorage.getItem(projectId));
   clearAll();
+  renderTasks(project);
 
   const backButton = createButton('back-button', 'Back');
   backButton.addEventListener('click', () => {
@@ -37,7 +43,6 @@ const displayTasksPage = projectId => {
       displayTasksPage(projectId);
     });
   });
-  renderTasks(project);
 
   const taskDivs = document.querySelectorAll('.task');
   taskDivs.forEach(taskDiv => {
@@ -47,10 +52,21 @@ const displayTasksPage = projectId => {
       displayExpandedTaskPage(projectId, task);
     });
   });
+
+  const deleteTaskButtons = document.querySelectorAll('.delete-button');
+  deleteTaskButtons.forEach(deleteTaskButton => {
+    deleteTaskButton.addEventListener('click', () => {
+      const taskIndex = deleteTaskButton.getAttribute('data-task');
+      deleteTask(projectId, taskIndex);
+      displayTasksPage(projectId);
+    });
+  });
 };
 
 const displayProjectsPage = () => {
   clearAll();
+  renderProjects();
+
   const addProjectButton = createButton('add-button', 'Add Project');
   addProjectButton.addEventListener('click', () => {
     const form = createForm('project');
@@ -60,13 +76,21 @@ const displayProjectsPage = () => {
       displayProjectsPage();
     });
   });
-  renderProjects();
 
   const projectDivs = document.querySelectorAll('.project');
   projectDivs.forEach(projectDiv => {
     projectDiv.addEventListener('click', () => {
       const projectId = projectDiv.getAttribute('data-proj');
       displayTasksPage(projectId);
+    });
+  });
+
+  const deleteProjectButtons = document.querySelectorAll('.delete-button');
+  deleteProjectButtons.forEach(deleteProjectButton => {
+    deleteProjectButton.addEventListener('click', () => {
+      const projectId = deleteProjectButton.getAttribute('data-proj');
+      deleteProject(projectId);
+      displayProjectsPage();
     });
   });
 };

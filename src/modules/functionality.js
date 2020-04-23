@@ -58,4 +58,14 @@ const createProject = data => {
   saveObject(newProject);
 };
 
-export { createTask, createProject };
+const deleteTask = (projectId, taskIndex) => {
+  const project = JSON.parse(localStorage.getItem(projectId));
+  project.tasks.splice(taskIndex, 1);
+  localStorage.setItem(projectId, JSON.stringify(project));
+};
+
+const deleteProject = projectId => {
+  localStorage.removeItem(projectId);
+};
+
+export { createTask, createProject, deleteTask, deleteProject };
