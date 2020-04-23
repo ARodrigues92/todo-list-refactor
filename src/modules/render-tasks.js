@@ -37,9 +37,8 @@ const renderTask = task => {
   return taskDiv;
 };
 
-const renderTasks = projectId => {
+const renderTasks = project => {
   clearDisplay();
-  const project = JSON.parse(localStorage.getItem(projectId));
   project.tasks.forEach(task => {
     const renderedTask = renderTask(task);
     display.appendChild(renderedTask);

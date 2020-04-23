@@ -10,6 +10,7 @@ import {
 import { renderTasks } from './modules/render-tasks';
 
 const displayTasksPage = projectId => {
+  const project = JSON.parse(localStorage.getItem(projectId));
   clearButtonsContainer();
   clearDisplay();
   const addTaskButton = createButton('add-button', 'Add Task');
@@ -17,11 +18,11 @@ const displayTasksPage = projectId => {
     const form = createForm('task');
     form.addEventListener('submit', e => {
       e.preventDefault();
-      createTask(projectId, e.target.elements);
-      renderTasks(projectId);
+      createTask(project, projectId, e.target.elements);
+      renderTasks(project);
     });
   });
-  renderTasks(projectId);
+  renderTasks(project);
 };
 
 const displayProjectsPage = () => {
