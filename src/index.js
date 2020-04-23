@@ -6,14 +6,28 @@ import { renderProjects } from './modules/render-projects';
 import { clearAll } from './modules/helper-functions';
 import { renderTasks, expandTask } from './modules/render-tasks';
 
-const displayExpandedTaskPage = (project, task) => {
+const displayExpandedTaskPage = (projectId, task) => {
   clearAll();
+
+  const backButton = createButton('back-button', 'Back');
+  backButton.addEventListener('click', () => {
+    // eslint-disable-next-line no-use-before-define
+    displayTasksPage(projectId);
+  });
+
   expandTask(task);
 };
 
 const displayTasksPage = projectId => {
   const project = JSON.parse(localStorage.getItem(projectId));
   clearAll();
+
+  const backButton = createButton('back-button', 'Back');
+  backButton.addEventListener('click', () => {
+    // eslint-disable-next-line no-use-before-define
+    displayProjectsPage();
+  });
+
   const addTaskButton = createButton('add-button', 'Add Task');
   addTaskButton.addEventListener('click', () => {
     const form = createForm('task');
@@ -30,7 +44,7 @@ const displayTasksPage = projectId => {
     taskDiv.addEventListener('click', () => {
       const taskIndex = taskDiv.getAttribute('data-task');
       const task = JSON.parse(localStorage.getItem(projectId)).tasks[taskIndex];
-      displayExpandedTaskPage(project, task);
+      displayExpandedTaskPage(projectId, task);
     });
   });
 };
