@@ -15,9 +15,11 @@ const expandTask = (task, taskIndex) => {
   const notesP = document.createElement('p');
 
   titleP.innerText = `Title: ${task.title}`;
-  descriptionP.innerText = `Description: ${task.description}`;
+  descriptionP.innerText = `Description: ${
+    task.description || 'No description'
+  }`;
   creationP.innerText = `Creation Date: ${task.creationDate}`;
-  dueP.innerText = `Due date: ${task.dueDate}`;
+  dueP.innerText = `Due date: ${task.dueDate || 'No due date'}`;
   priorityP.innerText = `Priority: ${task.priority}`;
   notesP.innerText = `Notes: ${task.notes}`;
 
@@ -41,7 +43,7 @@ const renderTask = (task, index) => {
   const completeSpan = document.createElement('span');
 
   titleP.innerText = `Title: ${task.title}`;
-  dueP.innerText = `Due date: ${task.dueDate}`;
+  dueP.innerText = `Due date: ${task.dueDate || 'No due date'}`;
 
   if (task.priority === '1') {
     taskDiv.style.borderColor = 'red';

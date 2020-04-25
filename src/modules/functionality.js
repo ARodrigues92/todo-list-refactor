@@ -24,8 +24,8 @@ const saveObject = object => {
 
 const createTask = (project, projectId, data) => {
   const title = data[0].value;
-  const description = data[1].value || 'No description provided';
-  const dueDate = data[2].value || 'Due date not set';
+  const description = data[1].value;
+  const dueDate = data[2].value;
   const priority = data[3].value || 3;
   const notes = data[4].value;
 
@@ -48,8 +48,8 @@ const createTask = (project, projectId, data) => {
 
 const createProject = data => {
   const title = data[0].value;
-  const description = data[1].value || 'No description provided';
-  const dueDate = data[2].value || 'Due date not set';
+  const description = data[1].value;
+  const dueDate = data[2].value;
 
   const creationDate = getCurrentDate();
   const tasks = [];

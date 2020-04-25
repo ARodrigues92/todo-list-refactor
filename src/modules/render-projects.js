@@ -14,9 +14,11 @@ const renderProject = (key, project) => {
   const dueP = document.createElement('p');
 
   titleP.innerText = `Title: ${project.title}`;
-  descriptionP.innerText = `Description: ${project.description}`;
+  descriptionP.innerText = `Description: ${
+    project.description || 'No description'
+  }`;
   creationP.innerText = `Creation date: ${project.creationDate}`;
-  dueP.innerText = `Due date: ${project.dueDate}`;
+  dueP.innerText = `Due date: ${project.dueDate || 'No due date'}`;
 
   projectDiv.append(titleP, descriptionP, creationP, dueP);
   return projectDiv;
