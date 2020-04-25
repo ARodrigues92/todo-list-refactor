@@ -64,8 +64,20 @@ const deleteTask = (projectId, taskIndex) => {
   localStorage.setItem(projectId, JSON.stringify(project));
 };
 
+const toggleComplete = (projectId, taskIndex) => {
+  const project = JSON.parse(localStorage.getItem(projectId));
+  const task = project.tasks[taskIndex];
+  if (task.complete) {
+    task.complete = false;
+  } else {
+    task.complete = true;
+  }
+  project.tasks[taskIndex] = task;
+  localStorage.setItem(projectId, JSON.stringify(project));
+};
+
 const deleteProject = projectId => {
   localStorage.removeItem(projectId);
 };
 
-export { createTask, createProject, deleteTask, deleteProject };
+export { createTask, createProject, deleteTask, toggleComplete, deleteProject };

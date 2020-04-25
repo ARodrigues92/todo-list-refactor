@@ -1,4 +1,4 @@
-import { createButtons } from './elements-creation';
+import { createButtons, createButton } from './elements-creation';
 
 const display = document.getElementById('display-area');
 
@@ -66,7 +66,12 @@ const renderTasks = project => {
     const renderedTask = renderTask(task, index);
     const deleteButton = createButtons('delete-button', 'Delete');
     deleteButton.setAttribute('data-task', index);
-    outerDiv.append(renderedTask, deleteButton);
+    const completeButton = createButtons(
+      'complete-button',
+      'Toggle completion'
+    );
+    completeButton.setAttribute('data-task', index);
+    outerDiv.append(renderedTask, deleteButton, completeButton);
     display.appendChild(outerDiv);
   });
 };

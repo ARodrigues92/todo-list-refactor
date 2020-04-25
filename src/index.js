@@ -5,6 +5,7 @@ import {
   createTask,
   createProject,
   deleteTask,
+  toggleComplete,
   deleteProject,
 } from './modules/functionality';
 import renderProjects from './modules/render-projects';
@@ -58,6 +59,15 @@ const displayTasksPage = projectId => {
     deleteTaskButton.addEventListener('click', () => {
       const taskIndex = deleteTaskButton.getAttribute('data-task');
       deleteTask(projectId, taskIndex);
+      displayTasksPage(projectId);
+    });
+  });
+
+  const completeButtons = document.querySelectorAll('.complete-button');
+  completeButtons.forEach(completeButton => {
+    completeButton.addEventListener('click', () => {
+      const taskIndex = completeButton.getAttribute('data-task');
+      toggleComplete(projectId, taskIndex);
       displayTasksPage(projectId);
     });
   });
