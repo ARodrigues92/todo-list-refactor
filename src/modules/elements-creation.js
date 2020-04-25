@@ -19,6 +19,8 @@ const createButtons = (butonClass, text) => {
 };
 
 const createForm = type => {
+  const formDiv = document.getElementById('form-container');
+  formDiv.innerHTML = '';
   const form = document.createElement('form');
   form.setAttribute('id', 'form');
 
