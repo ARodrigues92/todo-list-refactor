@@ -18,8 +18,9 @@ import renderProjects from './modules/render-projects';
 import { clearAll } from './modules/helper-functions';
 import { renderTasks, expandTask } from './modules/render-tasks';
 
-const displayExpandedTaskPage = (projectId, task, taskIndex) => {
+const displayExpandedTaskPage = (projectId, taskIndex) => {
   clearAll();
+  const task = JSON.parse(localStorage.getItem(projectId)).tasks[taskIndex];
   expandTask(task, taskIndex);
 
   const backButton = createButton('back-button', 'Back');
@@ -35,7 +36,7 @@ const displayExpandedTaskPage = (projectId, task, taskIndex) => {
     form.addEventListener('submit', e => {
       e.preventDefault();
       editTask(projectId, taskIndex, e.target.elements);
-      displayExpandedTaskPage(projectId, task, taskIndex);
+      displayExpandedTaskPage(projectId, taskIndex);
     });
   });
 };
@@ -65,8 +66,7 @@ const displayTasksPage = projectId => {
   taskDivs.forEach(taskDiv => {
     taskDiv.addEventListener('click', () => {
       const taskIndex = taskDiv.getAttribute('data-task');
-      const task = JSON.parse(localStorage.getItem(projectId)).tasks[taskIndex];
-      displayExpandedTaskPage(projectId, task, taskIndex);
+      displayExpandedTaskPage(projectId, taskIndex);
     });
   });
 
