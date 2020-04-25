@@ -69,7 +69,13 @@ const renderTask = (task, index) => {
 };
 
 const renderTasks = project => {
-  project.tasks.forEach((task, index) => {
+  const tasks = [...project.tasks];
+
+  tasks.sort((a, b) => {
+    return new Date(a.dueDate) - new Date(b.dueDate);
+  });
+
+  tasks.forEach((task, index) => {
     const outerDiv = document.createElement('div');
     const renderedTask = renderTask(task, index);
     const deleteButton = createButtons('delete-button', 'Delete');
