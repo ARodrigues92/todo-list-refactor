@@ -1,19 +1,26 @@
 import './styles/reset.css';
 import './styles/main.css';
-import { createButton, createForm } from './modules/elements-creation';
+import {
+  createButton,
+  createForm,
+  fillForm,
+} from './modules/elements-creation';
 import {
   createTask,
   createProject,
   deleteTask,
   toggleComplete,
+  editTask,
+  editProject,
   deleteProject,
 } from './modules/functionality';
 import renderProjects from './modules/render-projects';
 import { clearAll } from './modules/helper-functions';
 import { renderTasks, expandTask } from './modules/render-tasks';
 
-const displayExpandedTaskPage = (projectId, task) => {
+const displayExpandedTaskPage = (projectId, task, taskIndex) => {
   clearAll();
+  expandTask(task, taskIndex);
 
   const backButton = createButton('back-button', 'Back');
   backButton.addEventListener('click', () => {
@@ -21,7 +28,16 @@ const displayExpandedTaskPage = (projectId, task) => {
     displayTasksPage(projectId);
   });
 
-  expandTask(task);
+  const editTaskButton = document.getElementById('edit-button');
+  editTaskButton.addEventListener('click', () => {
+    const form = createForm('task');
+    fillForm('task', task);
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      editTask(projectId, taskIndex, e.target.elements);
+      displayExpandedTaskPage(projectId, task, taskIndex);
+    });
+  });
 };
 
 const displayTasksPage = projectId => {
@@ -50,7 +66,7 @@ const displayTasksPage = projectId => {
     taskDiv.addEventListener('click', () => {
       const taskIndex = taskDiv.getAttribute('data-task');
       const task = JSON.parse(localStorage.getItem(projectId)).tasks[taskIndex];
-      displayExpandedTaskPage(projectId, task);
+      displayExpandedTaskPage(projectId, task, taskIndex);
     });
   });
 
@@ -101,6 +117,21 @@ const displayProjectsPage = () => {
       const projectId = deleteProjectButton.getAttribute('data-proj');
       deleteProject(projectId);
       displayProjectsPage();
+    });
+  });
+
+  const editProjectButtons = document.querySelectorAll('.edit-button');
+  editProjectButtons.forEach(editProjectButton => {
+    editProjectButton.addEventListener('click', () => {
+      const projectId = editProjectButton.getAttribute('data-proj');
+      const project = JSON.parse(localStorage.getItem(projectId));
+      const form = createForm('project');
+      fillForm('project', project);
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        editProject(projectId, e.target.elements);
+        displayProjectsPage();
+      });
     });
   });
 };

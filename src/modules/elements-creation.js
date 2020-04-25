@@ -53,4 +53,16 @@ const createForm = type => {
   return form;
 };
 
-export { createButton, createButtons, createForm };
+const fillForm = (type, data) => {
+  const form = document.getElementById('form');
+  form.elements[0].value = data.title;
+  form.elements[1].value = data.description;
+  form.elements[2].value = data.dueDate;
+
+  if (type === 'task') {
+    form.elements[3].value = data.priority;
+    form.elements[4].value = data.notes;
+  }
+};
+
+export { createButton, createButtons, createForm, fillForm };

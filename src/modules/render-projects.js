@@ -29,7 +29,9 @@ const renderProjects = () => {
     const outerDiv = document.createElement('div');
     const deleteButton = createButtons('delete-button', 'Delete');
     deleteButton.setAttribute('data-proj', key);
-    outerDiv.append(renderedProject, deleteButton);
+    const editButton = createButtons('edit-button', 'Edit');
+    editButton.setAttribute('data-proj', key);
+    outerDiv.append(renderedProject, deleteButton, editButton);
     display.appendChild(outerDiv);
   }
 };

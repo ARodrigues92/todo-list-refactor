@@ -2,9 +2,10 @@ import { createButtons, createButton } from './elements-creation';
 
 const display = document.getElementById('display-area');
 
-const expandTask = task => {
-  const newDiv = document.createElement('div');
-  newDiv.classList.add('box');
+const expandTask = (task, taskIndex) => {
+  const outerDiv = document.createElement('div');
+  const taskDiv = document.createElement('div');
+  taskDiv.classList.add('box');
 
   const titleP = document.createElement('p');
   const descriptionP = document.createElement('p');
@@ -20,8 +21,13 @@ const expandTask = task => {
   priorityP.innerText = `Priority: ${task.priority}`;
   notesP.innerText = `Notes: ${task.notes}`;
 
-  newDiv.append(titleP, descriptionP, creationP, dueP, priorityP, notesP);
-  display.append(newDiv);
+  taskDiv.append(titleP, descriptionP, creationP, dueP, priorityP, notesP);
+
+  const editButton = createButton('edit-button', 'Edit');
+  editButton.setAttribute('data-task', taskIndex);
+
+  outerDiv.append(taskDiv, editButton);
+  display.appendChild(outerDiv);
 };
 
 const renderTask = (task, index) => {
